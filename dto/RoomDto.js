@@ -1,4 +1,4 @@
-class ProductDto {
+class RoomDto {
     constructor(camera, temperatura, umiditatea, nivelGaz) {
       this.camera = camera;
       this.temperatura = temperatura;
@@ -7,4 +7,4 @@ class ProductDto {
     }
   }
   
-  module.exports = ProductDto;
+  module.exports = RoomDto;

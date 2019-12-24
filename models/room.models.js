@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var ProductSchema = new Schema({
+var RoomSchema = new Schema({
     camera: Number,
     temperatura: Number,
     umiditatea: Number,
@@ -10,4 +10,4 @@ var ProductSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('Product', ProductSchema);
+module.exports = mongoose.model('Room', RoomSchema);

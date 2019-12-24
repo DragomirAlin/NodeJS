@@ -2,7 +2,7 @@ var bodyParser = require("body-parser");
 const express = require('express'); //express framework to have a higher level of methods
 const app = express(); //assign app variable the express class/method
 
-var product = require('./routes/product'); // Imports routes for the products
+var room = require('./routes/room.routers'); // Imports routes for the products var product = require('./routes/product'); // Imports routes for the products
 var url = "mongodb://localhost:27017/dbSHome";
 var http = require('http');
 var path = require("path");
@@ -25,7 +25,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use('/products', product);
+app.use('/rooms', room); // app.use('/products', product);
 
 
 const server = http.createServer(app);//create a server
@@ -60,7 +60,7 @@ s.on('connection', function (ws, req) {
         if (err) return console.log(err);
         var db = db.db("dbSHome");
 
-        db.collection("products").insertOne(jsontest, function (err, res) {
+        db.collection("rooms").insertOne(jsontest, function (err, res) {
           if (err) throw err;
           console.log("Document inserted");
         });
