@@ -7,8 +7,6 @@ var url = "mongodb://localhost:27017/dbSHome";
 var http = require('http');
 var path = require("path");
 const cors = require('cors');
-
-
 var mongoose = require('mongoose');
 var mongoDB = process.env.MONGODB_URI || url;
 mongoose.connect(mongoDB,
