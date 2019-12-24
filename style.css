@@ -1,0 +1,25 @@
+body {
+    text-align: center;
+    background-image: url('back.jpg');
+    font-family: "Times New Roman", Georgia, Serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100%;
+  }
+
+
+
+  h1 {
+    background-color: green;
+    text-align: center; 
+    font-family: "Playfair Display";
+    letter-spacing: 5px;
+  }
+  
+  div {
+    background-color: lightblue;
+  }
+  
+  p {
+    background-color: yellow;
+  }
