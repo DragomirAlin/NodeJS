@@ -72,5 +72,58 @@ s.on('connection', function (ws, req) {
   });
 });
 
+
+
+
+app.get("/ON", (req, res) => {
+  const options = {
+    host: "192.168.0.101",
+    path: "/LED=ON",
+    headers: {
+      "Content-Type": "text/html",
+    }
+  };
+  const httpReq = http.get(options, function(httpRes) {
+    //output status code to your console
+    console.log("statusCode: " + httpRes.statusCode);
+
+    httpRes.on("data", function(chunk) {
+      // still nothing happens on client - this will also just print to server console
+      console.log("data", chunk);
+      // return some data for requested route
+      return res.send(chunk);
+    });
+  });
+});
+
+app.get("/OFF", (req, res) => {
+  const options = {
+    host: "192.168.0.101",
+    path: "/LED=OFF",
+    headers: {
+      "Content-Type": "text/html",
+    }
+  };
+  const httpReq = http.get(options, function(httpRes) {
+    //output status code to your console
+    console.log("statusCode LED 1: " + httpRes.statusCode);
+
+    httpRes.on("data", function(chunk) {
+      // still nothing happens on client - this will also just print to server console
+      console.log("data", chunk);
+      // return some data for requested route
+      return res.send(chunk);
+    });
+  });
+});
+
+
+
+
+
+
+
+
+
 server.listen(3000);
 console.log('Server is up and running on port number ' + 3000);
