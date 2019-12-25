@@ -74,11 +74,10 @@ s.on('connection', function (ws, req) {
 
 
 
-
-app.get("/ON", (req, res) => {
+app.get("/1/ON", (req, res) => {
   const options = {
     host: "192.168.0.101",
-    path: "/LED=ON",
+    path: "/1/LED=ON",
     headers: {
       "Content-Type": "text/html",
     }
@@ -89,17 +88,62 @@ app.get("/ON", (req, res) => {
 
     httpRes.on("data", function(chunk) {
       // still nothing happens on client - this will also just print to server console
-      console.log("data", chunk);
+      // console.log("data", chunk);
+      console.log("Light 1 - ON")
       // return some data for requested route
       return res.send(chunk);
     });
   });
 });
 
-app.get("/OFF", (req, res) => {
+app.get("/1/OFF", (req, res) => {
   const options = {
     host: "192.168.0.101",
-    path: "/LED=OFF",
+    path: "/1/LED=OFF",
+    headers: {
+      "Content-Type": "text/html",
+    }
+  };
+  const httpReq = http.get(options, function(httpRes) {
+    //output status code to your console
+    console.log("statusCode: " + httpRes.statusCode);
+
+    httpRes.on("data", function(chunk) {
+      // still nothing happens on client - this will also just print to server console
+      // console.log("data", chunk);
+      console.log("Light 1 - OFF")
+      // return some data for requested route
+      return res.send(chunk);
+    });
+  });
+});
+
+app.get("/2/ON", (req, res) => {
+  const options = {
+    host: "192.168.0.101",
+    path: "/2/LED=ON",
+    headers: {
+      "Content-Type": "text/html",
+    }
+  };
+  const httpReq = http.get(options, function(httpRes) {
+    //output status code to your console
+    console.log("statusCode: " + httpRes.statusCode);
+
+    httpRes.on("data", function(chunk) {
+      // still nothing happens on client - this will also just print to server console
+      // console.log("data", chunk);
+      console.log("Light 2 - ON")
+      // return some data for requested route
+      return res.send(chunk);
+    });
+  });
+});
+
+app.get("/2/OFF", (req, res) => {
+  const options = {
+    host: "192.168.0.101",
+    path: "/2/LED=OFF",
     headers: {
       "Content-Type": "text/html",
     }
@@ -110,7 +154,53 @@ app.get("/OFF", (req, res) => {
 
     httpRes.on("data", function(chunk) {
       // still nothing happens on client - this will also just print to server console
-      console.log("data", chunk);
+      // console.log("data", chunk);
+      console.log("Light 2 - OFF")
+      // return some data for requested route
+      return res.send(chunk);
+    });
+  });
+});
+
+
+app.get("/3/ON", (req, res) => {
+  const options = {
+    host: "192.168.0.101",
+    path: "/3/LED=ON",
+    headers: {
+      "Content-Type": "text/html",
+    }
+  };
+  const httpReq = http.get(options, function(httpRes) {
+    //output status code to your console
+    console.log("statusCode: " + httpRes.statusCode);
+
+    httpRes.on("data", function(chunk) {
+      // still nothing happens on client - this will also just print to server console
+      // console.log("data", chunk);
+      console.log("Light 3 - ON")
+      // return some data for requested route
+      return res.send(chunk);
+    });
+  });
+});
+
+app.get("/3/OFF", (req, res) => {
+  const options = {
+    host: "192.168.0.101",
+    path: "/3/LED=OFF",
+    headers: {
+      "Content-Type": "text/html",
+    }
+  };
+  const httpReq = http.get(options, function(httpRes) {
+    //output status code to your console
+    console.log("statusCode LED 1: " + httpRes.statusCode);
+
+    httpRes.on("data", function(chunk) {
+      // still nothing happens on client - this will also just print to server console
+     // console.log("data", chunk);
+     console.log("Light 3 - OFF")
       // return some data for requested route
       return res.send(chunk);
     });
