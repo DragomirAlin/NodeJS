@@ -74,7 +74,7 @@ s.on('connection', function (ws, req) {
 
 
 
-app.get("/1/ON", (req, res) => {
+app.get("/rooms/1/ON", (req, res) => {
   const options = {
     host: "192.168.0.101",
     path: "/1/LED=ON",
@@ -96,7 +96,7 @@ app.get("/1/ON", (req, res) => {
   });
 });
 
-app.get("/1/OFF", (req, res) => {
+app.get("/rooms/1/OFF", (req, res) => {
   const options = {
     host: "192.168.0.101",
     path: "/1/LED=OFF",
@@ -118,7 +118,7 @@ app.get("/1/OFF", (req, res) => {
   });
 });
 
-app.get("/2/ON", (req, res) => {
+app.get("/rooms/2/ON", (req, res) => {
   const options = {
     host: "192.168.0.101",
     path: "/2/LED=ON",
@@ -140,7 +140,7 @@ app.get("/2/ON", (req, res) => {
   });
 });
 
-app.get("/2/OFF", (req, res) => {
+app.get("/rooms/2/OFF", (req, res) => {
   const options = {
     host: "192.168.0.101",
     path: "/2/LED=OFF",
@@ -163,7 +163,7 @@ app.get("/2/OFF", (req, res) => {
 });
 
 
-app.get("/3/ON", (req, res) => {
+app.get("/rooms/3/ON", (req, res) => {
   const options = {
     host: "192.168.0.101",
     path: "/3/LED=ON",
@@ -185,7 +185,7 @@ app.get("/3/ON", (req, res) => {
   });
 });
 
-app.get("/3/OFF", (req, res) => {
+app.get("/rooms/3/OFF", (req, res) => {
   const options = {
     host: "192.168.0.101",
     path: "/3/LED=OFF",
