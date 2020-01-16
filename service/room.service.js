@@ -7,7 +7,7 @@ class RoomService {
             const rooms = await Room.find({
                 'camera': id
             });
-            rooms.sort((el1, el2) => el1 < el2 ? 1 : 0);
+            rooms.sort((el1, el2) => el1 < el2 ? 1 : -1);
             const lastRoom = rooms[0];
             // map to dto 
             const roomDto = new RoomDto(lastRoom.camera, lastRoom.temperatura, lastRoom.umiditatea, lastRoom.nivelGaz);
