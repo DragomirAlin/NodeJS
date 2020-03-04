@@ -150,7 +150,7 @@ app.get("/rooms/2/OFF", (req, res) => {
   };
   const httpReq = http.get(options, function(httpRes) {
     //output status code to your console
-    console.log("statusCode LED 1: " + httpRes.statusCode);
+    console.log("statusCode: " + httpRes.statusCode);
 
     httpRes.on("data", function(chunk) {
       // still nothing happens on client - this will also just print to server console
@@ -206,12 +206,6 @@ app.get("/rooms/3/OFF", (req, res) => {
     });
   });
 });
-
-
-
-
-
-
 
 
 
