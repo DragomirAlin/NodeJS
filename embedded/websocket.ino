@@ -21,8 +21,6 @@ size_t measureJsonPretty(const JsonDocument& doc);
 
 
 int buzzer = D0;
-const int sensorMagneticDoor = D4;
-int state; // 0 close - 1 open wwitch
 DHT dht3 = DHT(D3, DHTTYPE);
   
 WebSocketClient webSocketClient;
@@ -36,9 +34,7 @@ void setup() {
   Serial.begin(115200);
     dht3.begin();
     pinMode(buzzer, OUTPUT);
-    pinMode(sensorMagneticDoor, INPUT_PULLUP);
 
-    
   delay(10);
   // We start by connecting to a WiFi network
   Serial.println();
@@ -68,13 +64,12 @@ void loop() {
   int sensorValue = analogRead(0);
   float sensor_volt=(float)sensorValue/1024*5.0;
   int limitasenzor = 2;
-  state = digitalRead(sensorMagneticDoor);
 
     
   if (client.connected()) {
       currentMillis=millis(); 
      StaticJsonDocument<300> doc;
-         doc["camera"] = 3;
+         doc["camera"] = 1;
          doc["temperatura"] = (float)dht3.readTemperature();
          doc["umiditatea"] = (float)dht3.readHumidity();
    if (sensor_volt > limitasenzor)
@@ -88,13 +83,6 @@ void loop() {
          doc["nivelGaz"] = "scazut";
     }
    
-    if (state == HIGH){
-    Serial.println("deschisa");
-         doc["usaIntrare"] = "deschisa"; 
-    }else{
-         doc["usaIntrare"] = "inchisa"; 
-    Serial.println("inchisa");
-  }
   delay(200);
 
     String buffer;
