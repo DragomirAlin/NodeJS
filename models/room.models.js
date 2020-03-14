@@ -6,6 +6,7 @@ var RoomSchema = new Schema({
     temperatura: Number,
     umiditatea: Number,
     nivelGaz: String,
+    usaIntrare: String,
     last_updated: Date
 });
 
