@@ -20,6 +20,9 @@ void setup() {
 
   pinMode(ledPin3, OUTPUT);
   digitalWrite(ledPin3, LOW);
+
+  pinMode(ledPin4, OUTPUT);
+  digitalWrite(ledPin4, LOW);
  
   // Connect to WiFi network
   Serial.println();
@@ -96,6 +99,16 @@ void loop() {
   if (request.indexOf("/3/LED=OFF") != -1)  {
     digitalWrite(ledPin3, LOW);
     value3 = LOW;
+  }
+
+   int value4 = LOW;
+   digitalWrite(ledPin4, LOW);
+  if (request.indexOf("/AIR=ON") != -1)  {
+    digitalWrite(ledPin4, HIGH);
+    value4 = HIGH;
+  }
+  if (request.indexOf("/AIR=OFF") != -1)  {
+    digitalWrite(ledPin4, LOW);
   }
  
 // Set ledPin according to the request
