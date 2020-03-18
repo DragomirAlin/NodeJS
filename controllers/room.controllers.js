@@ -1,5 +1,6 @@
 var Room = require('../models/room.models');
 const roomService = require("../service/room.service");
+var http = require('http');
 
 exports.room_create = function (req, res) {
     var room = new Room(
@@ -44,6 +45,183 @@ exports.room_delete = function (req, res) {
         res.send('Deleted successfully!');
     })
 };
+
+exports.room_1_on = function (req, res) {
+    const options = {
+        host: "192.168.0.101",
+        path: "/1/LED=ON",
+        headers: {
+          "Content-Type": "text/html",
+        }
+      };
+      const httpReq = http.get(options, function(httpRes) {
+        //output status code to your console
+        console.log("statusCode: " + httpRes.statusCode);
+    
+        httpRes.on("data", function(chunk) {
+          // still nothing happens on client - this will also just print to server console
+          // console.log("data", chunk);
+          console.log("Light 1 - ON")
+          // return some data for requested route
+          return res.send(chunk);
+        });
+      });
+}
+
+exports.room_1_off = function (req, res){
+    const options = {
+        host: "192.168.0.101",
+        path: "/1/LED=OFF",
+        headers: {
+          "Content-Type": "text/html",
+        }
+      };
+      const httpReq = http.get(options, function(httpRes) {
+        //output status code to your console
+        console.log("statusCode: " + httpRes.statusCode);
+    
+        httpRes.on("data", function(chunk) {
+          // still nothing happens on client - this will also just print to server console
+          // console.log("data", chunk);
+          console.log("Light 1 - OFF")
+          // return some data for requested route
+          return res.send(chunk);
+        });
+      });
+}
+
+exports.room_2_on = function (req, res){
+    const options = {
+        host: "192.168.0.101",
+        path: "/2/LED=ON",
+        headers: {
+          "Content-Type": "text/html",
+        }
+      };
+      const httpReq = http.get(options, function(httpRes) {
+        //output status code to your console
+        console.log("statusCode: " + httpRes.statusCode);
+    
+        httpRes.on("data", function(chunk) {
+          // still nothing happens on client - this will also just print to server console
+          // console.log("data", chunk);
+          console.log("Light 2 - ON")
+          // return some data for requested route
+          return res.send(chunk);
+        });
+      });
+}
+
+exports.room_2_off = function (req, res){
+    const options = {
+        host: "192.168.0.101",
+        path: "/2/LED=OFF",
+        headers: {
+          "Content-Type": "text/html",
+        }
+      };
+      const httpReq = http.get(options, function(httpRes) {
+        //output status code to your console
+        console.log("statusCode: " + httpRes.statusCode);
+    
+        httpRes.on("data", function(chunk) {
+          // still nothing happens on client - this will also just print to server console
+          // console.log("data", chunk);
+          console.log("Light 2 - OFF")
+          // return some data for requested route
+          return res.send(chunk);
+        });
+      });
+}
+
+exports.room_3_on = function (req, res){
+    const options = {
+        host: "192.168.0.101",
+        path: "/3/LED=ON",
+        headers: {
+          "Content-Type": "text/html",
+        }
+      };
+      const httpReq = http.get(options, function(httpRes) {
+        //output status code to your console
+        console.log("statusCode: " + httpRes.statusCode);
+    
+        httpRes.on("data", function(chunk) {
+          // still nothing happens on client - this will also just print to server console
+          // console.log("data", chunk);
+          console.log("Light 3 - ON")
+          // return some data for requested route
+          return res.send(chunk);
+        });
+      });
+}
+
+exports.room_3_off = function (req, res){
+    const options = {
+        host: "192.168.0.101",
+        path: "/3/LED=OFF",
+        headers: {
+          "Content-Type": "text/html",
+        }
+      };
+      const httpReq = http.get(options, function(httpRes) {
+        //output status code to your console
+        console.log("statusCode LED 1: " + httpRes.statusCode);
+    
+        httpRes.on("data", function(chunk) {
+          // still nothing happens on client - this will also just print to server console
+         // console.log("data", chunk);
+         console.log("Light 3 - OFF")
+          // return some data for requested route
+          return res.send(chunk);
+        });
+      });
+}
+
+exports.room_air_on = function (req, res){
+    const options = {
+        host: "192.168.0.101",
+        path: "/AIR=ON",
+        headers: {
+          "Content-Type": "text/html",
+        }
+      };
+      const httpReq = http.get(options, function(httpRes) {
+        //output status code to your console
+        console.log("statusCode LED 1: " + httpRes.statusCode);
+    
+        httpRes.on("data", function(chunk) {
+          // still nothing happens on client - this will also just print to server console
+         // console.log("data", chunk);
+         console.log("Light 3 - OFF")
+          // return some data for requested route
+          return res.send(chunk);
+        });
+      });
+}
+
+exports.room_air_off = function (req, res){
+    const options = {
+        host: "192.168.0.101",
+        path: "/AIR=OFF",
+        headers: {
+          "Content-Type": "text/html",
+        }
+      };
+      const httpReq = http.get(options, function(httpRes) {
+        //output status code to your console
+        console.log("statusCode LED 1: " + httpRes.statusCode);
+    
+        httpRes.on("data", function(chunk) {
+          // still nothing happens on client - this will also just print to server console
+         // console.log("data", chunk);
+         console.log("Light 3 - OFF")
+          // return some data for requested route
+          return res.send(chunk);
+        });
+      });
+}
+
 
 
 
