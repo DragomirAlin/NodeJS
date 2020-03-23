@@ -15,6 +15,10 @@ router.get('/3/ON', room_controller.room_3_on);
 router.get('/3/OFF', room_controller.room_3_off);
 router.get('/AIR/ON', room_controller.room_air_on);
 router.get('/AIR/OFF', room_controller.room_air_off);
+router.get('/CPU/B', room_controller.rpi_cpu);
+router.get('/OS/P', room_controller.rpi_os_p);
+router.get('/OS/H', room_controller.rpi_os_h);
+
 
 
   

@@ -10,6 +10,7 @@ const cors = require('cors');
 const PiCamera = require('pi-camera');
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
+const si = require('systeminformation');
 
 
 var mongoDB = process.env.MONGODB_URI || url;
@@ -66,6 +67,30 @@ s.on('connection', function (ws, req) {
     console.log("lost one client");
   });
 });
+
+// si.cpu()
+//     .then(data => {
+//         console.log('CPU Information:');
+//         console.log('- manufucturer: ' + data.manufacturer);
+//         console.log('- brand: ' + data.brand);
+//         console.log('- speed: ' + data.speed);
+//         console.log('- cores: ' + data.cores);
+//         console.log('- physical cores: ' + data.physicalCores);
+//         console.log('- space free : ' + data.processors);
+//         console.log('...');
+//     })
+//     .catch(error => console.error(error));
+
+
+// si.mem().then(data => { 
+//         console.log('data free: ' + data.free);
+//         console.log('data used: ' + data.used);
+// });
+
+// si.dockerInfo().then(data => {
+//         console.log('docker info: ' + data.containersRunning);
+//         console.log('docker info 2: ' + data.architecture);
+// })
 
 const myCamera = new PiCamera({
   mode: 'video',

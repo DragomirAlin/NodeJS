@@ -1,6 +1,7 @@
 var Room = require('../models/room.models');
 const roomService = require("../service/room.service");
 var http = require('http');
+const si = require('systeminformation');
 
 exports.room_create = function (req, res) {
     var room = new Room(
@@ -18,6 +19,30 @@ exports.room_create = function (req, res) {
             return next(err);
         }
         res.send('Room Created successfully')
+    })
+};
+
+exports.rpi_cpu = function (req, res) {
+  si.cpu()
+    .then(data => { data.brand;
+        res.send(data.brand);
+        return data.brand;
+    })
+};
+
+exports.rpi_os_p = function (req, res) {
+  si.osInfo()
+    .then(data => { data.platform;
+        res.send(data.platform);
+        return data.platform;
+    })
+};
+
+exports.rpi_os_h = function (req, res) {
+  si.osInfo()
+    .then(data => { data.hostname;
+        res.send(data.hostname);
+        return data.hostname;
     })
 };
 
