@@ -13,7 +13,8 @@ var RoomSchema = new Schema({
 var osSchema = new Schema({
     platform: String,
     hostname: String,
-    device : String,
+ 
+
 })
 
 var networkSchema = new Schema({
@@ -44,10 +45,10 @@ var cpuSchema = new Schema({
 
 
 module.exports = mongoose.model('Room', RoomSchema);
-module.exports = mongoose.model('OS', osSchema);
-module.exports = mongoose.model('Network', networkSchema);
-module.exports = mongoose.model('FileSystem', filesystemSchema);
-module.exports = mongoose.model('Process', processSchema);
-module.exports = mongoose.model('Memory', memorySchema);
-module.exports = mongoose.model('CPU',cpuSchema);
+// module.exports = mongoose.model('OS', osSchema);
+// module.exports = mongoose.model('Network', networkSchema);
+// module.exports = mongoose.model('FileSystem', filesystemSchema);
+// module.exports = mongoose.model('Process', processSchema);
+// module.exports = mongoose.model('Memory', memorySchema);
+// module.exports = mongoose.model('CPU',cpuSchema);
 

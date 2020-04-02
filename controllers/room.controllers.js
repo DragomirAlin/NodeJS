@@ -1,14 +1,6 @@
 var Room = require('../models/room.models');
-var OS = require('../models/room.models');
-var Network = require('../models/room.models');
-var FileSystem = require('../models/room.models');
-var Process = require('../models/room.models');
-var Memory = require('../models/room.models');
-var CPU = require('../models/room.models');
-
 const roomService = require("../service/room.service");
 var http = require('http');
-const si = require('systeminformation');
 
 exports.room_create = function (req, res) {
   var room = new Room(
@@ -29,59 +21,6 @@ exports.room_create = function (req, res) {
   })
 };
 
-// exports.network = function (req, res) {
-//   si.networkInterfaces()
-//       .then(data => {
-//         data;
-//       })
-// }
-
-// exports.file_system = function (req, res) {
-//   si.networkInterfaces()
-//       .then(data => {
-//         data;
-//       })
-// }
-
-// exports.process_load = function (req, res) {
-//   si.networkInterfaces()
-//       .then(data => {
-//         data;
-//       })
-// }
-
-// exports.memory = function (req, res) {
-//   si.networkInterfaces()
-//       .then(data => {
-//         data;
-//       })
-// }
-
-exports.cpu = function (req, res) {
-  si.mem()
-      .then(data => {
-        data;
-        var memory = new Memory({
-          main : data.main
-        })
-        res.send(cpu);
-      })
-}
-
-exports.operating_system = function (req, res) {
-  si.osInfo()
-    .then(data => {
-      data;
-
-      var rpi = new OS({
-        platform: data.platform,
-        hostname: data.hostname
-      })
-      res.send(rpi);
-    })
-
-    res.send(rpi);
-};
 
 exports.roomById = async (request, response, next) => {
   const roomId = request.params.id;
@@ -93,6 +32,16 @@ exports.roomById = async (request, response, next) => {
       next(err);
     });
 };
+
+exports.getOS = async (request, response, next) => {
+  roomService
+    .getOS()
+    .then(data => response.send(data))
+    .catch(err => {
+      console.log("Eroare getOS");
+      next(err);
+    });
+}
 
 exports.room_update = function (req, res) {
   Room.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, room) {

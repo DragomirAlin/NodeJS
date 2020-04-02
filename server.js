@@ -2,6 +2,8 @@ var bodyParser = require("body-parser");
 const express = require('express'); //express framework to have a higher level of methods
 const app = express(); //assign app variable the express class/method
 var room = require('./routes/room.routers'); // Imports routes for the products var product = require('./routes/product'); // Imports routes for the products
+var raspi = require('./routes/raspi.routers'); // Imports routes for the products var product = require('./routes/product'); // Imports routes for the products
+
 var url = "mongodb://localhost:27017/dbSHome";
 var http = require('http');
 var path = require("path");
@@ -29,6 +31,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/rooms', room); 
+app.use('/raspi', raspi);
 
 const server = http.createServer(app);//create a server
 require('dns').lookup(require('os').hostname(), function (err, add, fam) {
