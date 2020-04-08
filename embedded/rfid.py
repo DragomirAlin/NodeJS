@@ -9,10 +9,11 @@ import datetime
 
 GPIO.setwarnings(False);
 continue_reading = True
-myclient = pymongo.MongoClient("mongodb://192.168.0.100:27017/")
+myclient = pymongo.MongoClient("mongodb://alin:alin@database-shard-00-00-2t2ug.mongodb.net:27017,database-shard-00-01-2t2ug.mongodb.net:27017,database-shard-00-02-2t2ug.mongodb.net:27017/RFID?ssl=true&replicaSet=database-shard-0&authSource=admin&retryWrites=true&w=majority")
 mydb = myclient["RFID"]
 mylog = mydb["log"]
 myuser = mydb["user"]
+
 dblist = myclient.list_database_names()
 if "RFID" in dblist:
   print("The database exists.")
