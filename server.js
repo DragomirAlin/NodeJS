@@ -3,8 +3,9 @@ const express = require('express'); //express framework to have a higher level o
 const app = express(); //assign app variable the express class/method
 var room = require('./routes/room.routers'); // Imports routes for the products var product = require('./routes/product'); // Imports routes for the products
 var raspi = require('./routes/raspi.routers'); // Imports routes for the products var product = require('./routes/product'); // Imports routes for the products
-
+var rfid = require('./routes/rfid.routers');
 var url = "mongodb://localhost:27017/dbSHome";
+var url2 = "mongodb://localhost:27017/RFID";
 var http = require('http');
 var path = require("path");
 const WebSocket = require('ws');
@@ -12,11 +13,10 @@ const cors = require('cors');
 const PiCamera = require('pi-camera');
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
-const si = require('systeminformation');
+var mongoose2 = require('mongoose');
 
 
 var mongoDB = process.env.MONGODB_URI || url;
-
 mongoose.connect(mongoDB,
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err, db) => {
@@ -27,11 +27,27 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
+
+
+
+var mongoDB2 = process.env.MONGODB_URI || url2;
+mongoose2.connect(mongoDB2,
+  { useNewUrlParser: true, useUnifiedTopology: true },
+  (err, db) => {
+    if (err) return console.log(err);
+  });
+
+mongoose2.Promise = global.Promise;
+var db2 = mongoose2.connection;
+db2.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/rooms', room); 
 app.use('/raspi', raspi);
+app.use('/rfid', rfid);
 
 const server = http.createServer(app);//create a server
 require('dns').lookup(require('os').hostname(), function (err, add, fam) {
