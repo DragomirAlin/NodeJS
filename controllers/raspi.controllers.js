@@ -96,11 +96,12 @@ exports.docker = function (req, res) {
 }
 
 exports.network_connection = function (req, res) {
-  si.networkConnections()
+  si.networkGatewayDefault()	
       .then(data => {
         data;
         var netCon = new NetworkConnection({
-        
+          localaddress : data
+         
         })
         res.send(netCon);
       })

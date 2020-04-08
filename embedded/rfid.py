@@ -5,6 +5,7 @@ import signal
 import time
 import json
 from datetime import date 
+import datetime
 
 GPIO.setwarnings(False);
 continue_reading = True
@@ -18,9 +19,9 @@ if "RFID" in dblist:
 
 
 GPIO.setmode(GPIO.BOARD)
-GPIO.setup(13, GPIO.OUT)
-p =GPIO.PWM(13, 50)
-p.start(7.5)
+GPIO.setup(3, GPIO.OUT)
+pwm=GPIO.PWM(3, 50)
+pwm.start(7)
 
 
 # Create an object of the class MFRC522
@@ -49,33 +50,25 @@ try:
         doc = myuser.find(myquery)
         x = {"uid": str(uid[0])+"."+str(uid[1])+"."+str(uid[2])+"."+str(uid[3])}
         y = json.dumps(x); # parsare JSON
+
         
         for w in doc:
             print w
-       
+            
             print y #print RFID
             if len(w) > 1:
                 print("Acces OK!")
                 #print("Card UID: "+str(uid[0])+"."+str(uid[1])+"."+str(uid[2])+"."+str(uid[3]))
-                mydict = { "uid": str(uid[0])+"."+str(uid[1])+"."+str(uid[2])+"."+str(uid[3]) }
+                x = datetime.datetime.now()
+                mydict = { "uid": str(uid[0])+"."+str(uid[1])+"."+str(uid[2])+"."+str(uid[3]), "nume" : w["nume"], "data" : x }
                 x = mylog.insert_one(mydict)
                 print(len(w))
-                SetAngle(90)
-                pwm.stop()
-                GPIO.cleanup()
-                try:
-                    while True:
-                        p.ChangeDutyCycle(7.5)  # turn towards 90 degree
-                        time.sleep(1) # sleep 1 second
-                        p.ChangeDutyCycle(2.5)  # turn towards 0 degree
-                        time.sleep(1) # sleep 1 second
-                        p.ChangeDutyCycle(12.5) # turn towards 180 degree
-                        time.sleep(1) # sleep 1 second 
-                except KeyboardInterrupt:
-                    p.stop()
-                    GPIO.cleanup()
-                time.sleep(2)
-
+                GPIO.output(3, True)
+                pwm.ChangeDutyCycle(2)
+                time.sleep(5)
+                GPIO.output(3, True)
+                pwm.ChangeDutyCycle(7)
+               
             else:
                 print("Acces Neautorizat!")
                 print("Card UID: "+str(uid[0])+"."+str(uid[1])+"."+str(uid[2])+"."+str(uid[3]))
