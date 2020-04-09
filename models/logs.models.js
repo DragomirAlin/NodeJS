@@ -6,7 +6,9 @@ var logs = new Schema({
     nume: String,
     data: String,
     uid: String,
-});
+},
+{collection : 'logs'}
+);
 
 
-module.exports = mongoose2.model('logs', logs);
+module.exports = mongoose2.model('logs', logs, 'logs');

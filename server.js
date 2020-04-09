@@ -5,7 +5,8 @@ var room = require('./routes/room.routers'); // Imports routes for the products 
 var raspi = require('./routes/raspi.routers'); // Imports routes for the products var product = require('./routes/product'); // Imports routes for the products
 var rfid = require('./routes/rfid.routers');
 var url = "mongodb://localhost:27017/dbSHome";
-var url2 = "mongodb://localhost:27017/RFID";
+var url2 = "mongodb://localhost:2017/RFID";
+// var url2 = "mongodb+srv://alin:alin@database-2t2ug.mongodb.net/RFID?retryWrites=true&w=majority";
 var http = require('http');
 const WebSocket = require('ws');
 const cors = require('cors');
@@ -21,25 +22,21 @@ mongoose.connect(mongoDB,
   (err, db) => {
     if (err) return console.log(err);
   });
-
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.on('error', console.error.bind(console, 'MongoDB connection error 1:'));
 
 
 
 
 var mongoDB2 = process.env.MONGODB_URI || url2;
-mongoose2.connect(mongoDB2,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  (err, db) => {
+ mongoose2.connect(mongoDB2,{ useNewUrlParser: true, useUnifiedTopology: true },
+  (err, client) => {
     if (err) return console.log(err);
-  });
-
+    });
 mongoose2.Promise = global.Promise;
 var db2 = mongoose2.connection;
-db2.on('error', console.error.bind(console, 'MongoDB2 connection error:'));
-
+db2.on('error', console.error.bind(console, 'MongoDB connection error 2:'));
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -55,8 +52,6 @@ require('dns').lookup(require('os').hostname(), function (err, add, fam) {
 
 
 const s = new WebSocket.Server({ server });
-
-
 s.on('connection', function (ws, req) {
   ws.on('message', function (message) {
     var json = JSON.parse(message);
