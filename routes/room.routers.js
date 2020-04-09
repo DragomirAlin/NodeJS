@@ -15,15 +15,6 @@ router.get('/3/ON', room_controller.room_3_on);
 router.get('/3/OFF', room_controller.room_3_off);
 router.get('/AIR/ON', room_controller.room_air_on);
 router.get('/AIR/OFF', room_controller.room_air_off);
-// router.get('/SI/OS', room_controller.operating_system);
-// router.get('/SIN/NETWORK', room_controller.network_test);
-// router.get('/SI/FILE',room_controller.file_system)
-// router.get('/SI/PROCESS',room_controller.process_load)
-// router.get('/SI/MEMORY',room_controller.memory)
-// router.get('/SI/CPU',room_controller.cpu)
 
-
-
-  
 
 module.exports = router;
