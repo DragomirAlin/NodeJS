@@ -1,13 +1,13 @@
 var mongoose2 = require('mongoose');
-var Schema = mongoose2.Schema;
+var Schema2 = mongoose2.Schema;
 
 
-var logs = new Schema({
+var logs = new Schema2({
     nume: String,
     data: String,
     uid: String,
-},
-{collection : 'logs'}
+}
+// {collection : 'logs'}
 );
 
 

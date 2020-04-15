@@ -23,10 +23,22 @@ exports.user_delete = function (req, res){
   }, function(err, _){
     if (err) return res.send(err)
     res.json({
-      message: 'ok'
+      message: 'ok server delete'
     })
   })
 }
+
+exports.view_all_user = function(req, res){
+  rfidUser.find()
+  .then(data => {
+      res.send(data);
+      return data;
+  }).catch(err => {
+    console.log("Error for view all user");
+    next(err);
+  });
+};
+
 
 exports.view_all_logs = function(req, res){
   logs.find()
