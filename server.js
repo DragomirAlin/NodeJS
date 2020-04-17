@@ -61,7 +61,8 @@ s.on('connection', function (ws, req) {
       console.log('Temperatura: ' + json.temperatura);
       console.log('Umiditatea: ' + json.umiditatea);
       console.log('Nivelul de gaz: ' + json.nivelGaz);
-      console.log('Stare usa: ' + json.usaIntrare);
+      console.log('Stare usa: ' + json.usa);
+      console.log('Senzor flacara: ' + json.foc)
       console.log('');
     }, 5000);
 

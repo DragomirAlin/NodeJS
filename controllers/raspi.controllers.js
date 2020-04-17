@@ -5,7 +5,7 @@ var currentLoadSchema = require('../models/currLoad.models');
 var Memory = require('../models/mem.models');
 var CPU = require('../models/cpu.models');
 var DockerProcess = require('../models/docker.models');
-var NetworkConnection = require('../models/cpu.models');
+var NetworkConnection = require('../models/netConec.models');
 
 const si = require('systeminformation');
 
@@ -24,17 +24,19 @@ exports.operating_system = function (req, res) {
   };
   
 exports.network_test = function (req, res) {
-  si.networkInterfaces()
+  si.networkGatewayDefault()
       .then(data => {
         data;
         var net = new Network({
-          ip4 : data[0].ip4,
-          speed : data[0].speed,
-          dhcp : data[0].dhcp
+          ip4 : data,
+          // speed : data[0].speed,
+          dhcp : "dddd"
         })
         res.send(net);
       })
 };
+
+
 
 exports.file_system = function (req, res) {
   si.diskLayout()
@@ -42,7 +44,7 @@ exports.file_system = function (req, res) {
         data;
       var fs = new FileSystem({
         // device = data[0].device,
-        // size = data[0].size
+        // size = data[0].name
       })
       res.send(fs);
       })
@@ -96,11 +98,13 @@ exports.docker = function (req, res) {
 }
 
 exports.network_connection = function (req, res) {
-  si.networkGatewayDefault()	
+  si.wifiNetworks()	
       .then(data => {
         data;
         var netCon = new NetworkConnection({
-          localaddress : data
+          ssid :  data[0].ssid,
+          signal : data[0].signalLevel,
+          quality : data[0].quality
          
         })
         res.send(netCon);

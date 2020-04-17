@@ -9,7 +9,9 @@ exports.room_create = function (req, res) {
       temperatura: req.body.temperatura,
       umiditatea: req.body.umiditatea,
       nivelGaz: req.body.nivelGaz,
-      usaIntrare: req.usaIntrare
+      usa: req.body.usa,
+      foc: req.body.foc,
+      aer : req.body.aer,
     }
   );
 

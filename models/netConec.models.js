@@ -3,8 +3,9 @@ var Schema = mongoose.Schema;
 
 
 var networkConnection = new Schema({
-    localaddress: String,
-    localport : String
+   ssid: String,
+    signal : String,
+    quality: String,
 });
 
 
