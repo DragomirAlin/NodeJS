@@ -6,8 +6,8 @@ class RoomDto {
       this.nivelGaz = nivelGaz;
       this.usa = usa;
       this.foc = foc;
-      this.aer = aer;
-    }
+      this.aer = aer;   
+    } //test
   }
   
   module.exports = RoomDto;
