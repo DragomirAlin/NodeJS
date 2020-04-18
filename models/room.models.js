@@ -9,6 +9,7 @@ var RoomSchema = new Schema({
     usa: String,
     foc: String,
     aer: Number,
+    apa: String,
     
 }
 );
