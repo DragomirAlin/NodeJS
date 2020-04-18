@@ -1,4 +1,3 @@
-
 #include <ESP8266WiFi.h>
 #include <WebSocketClient.h>
 #include <Adafruit_Sensor.h>
@@ -21,7 +20,7 @@ const int espport= 3000;
 size_t measureJsonPretty(const JsonDocument& doc);
 
 
-int buzzer = D0;
+int senzorapa = D0;
 const int sensorMagneticDoor = D2;
 int state; // 0 close - 1 open wwitch
 DHT dht3 = DHT(D1, DHTTYPE);
@@ -36,7 +35,7 @@ WiFiClient client; // Use WiFiClient class to create TCP connections
 void setup() {
   Serial.begin(115200);
     dht3.begin();
-    pinMode(buzzer, OUTPUT);
+    pinMode(senzorapa, INPUT);
     pinMode(sensorMagneticDoor, INPUT_PULLUP);
 
     
@@ -70,6 +69,7 @@ void loop() {
   float sensor_volt=(float)sensorValue/1024*5.0;
   float limitasenzor = 3;
   state = digitalRead(sensorMagneticDoor);
+  int sza = digitalRead(senzorapa);
 
     
   if (client.connected()) {
@@ -81,11 +81,9 @@ void loop() {
    if (sensor_volt > limitasenzor)
      {
       Serial.println(sensor_volt);
-      digitalWrite(buzzer, HIGH);
          doc["nivelGaz"] = "ridicat";
      }else{ 
       Serial.println(sensor_volt);
-      digitalWrite(buzzer, LOW);
          doc["nivelGaz"] = "scăzut";
     }
    
@@ -96,6 +94,15 @@ void loop() {
          doc["usa"] = "inchisă"; 
     Serial.println("inchisă");
   }
+
+    if (sza == HIGH){
+    Serial.println("OK");
+         doc["apa"] = "OK"; 
+    }else{
+         doc["apa"] = "Scurgeri"; 
+    Serial.println("Scurgeri");
+  }
+  
   delay(200);
 
     String buffer;
