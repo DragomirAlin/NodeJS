@@ -1,7 +1,7 @@
 version: "2"
 services:
   app:
-    container_name: app
+    container_name: server
     restart: always
     build: .
     ports:
@@ -17,4 +17,11 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
+ 
+  rfid:
+    container_name: rfid
+    image: dragomiralin/rfidmongo:v1
+    privileged: true
+    links:
+      - mongo
  
