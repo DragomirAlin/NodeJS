@@ -43,8 +43,8 @@ exports.file_system = function (req, res) {
       .then(data => {
         data;
       var fs = new FileSystem({
-        device = data[0].device,
-        size = data[0].name
+        // device = data[0].device,
+        // size = data[0].name
       })
       res.send(fs);
       })
