@@ -11,4 +11,4 @@ var logs = new Schema2({
 );
 
 
-module.exports = mongoose2.model('logs', logs, 'logs');
+module.exports = mongoose2.model('log', logs, 'log');

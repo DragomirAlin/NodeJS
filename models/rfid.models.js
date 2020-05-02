@@ -9,4 +9,4 @@ var rfidUser = new Schema2({
 );
 
 
-module.exports = mongoose2.model('user', rfidUser, 'users');
+module.exports = mongoose2.model('user', rfidUser, 'user');
