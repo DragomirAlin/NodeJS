@@ -103,6 +103,11 @@ myCamera.record()
   });
 
 
+  setInterval(function() {
+
+
+  si.fsOpenFiles().then(data => console.log(data));
+  si.mem().then(data => console.log(data));
 
 
   si.fsSize()
@@ -131,13 +136,9 @@ myCamera.record()
     console.log(data);
   })
 
-  si.networkInterfaces().then(data => console.log(data));
 
-  si.networkGatewayDefault().then(data => console.log(data));
+  si.dockerAl.then(data => console.log(data));
 
-
-  si.networkConnections().then(data => console.log(data));
-  si.wifiNetworks().then(data => console.log(data));
-  si.dockerInfo().then(data => console.log(data));
+}, 1000)
 server.listen(3000);
 console.log('Server is up and running on port number ' + 3000);
