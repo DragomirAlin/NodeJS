@@ -103,42 +103,13 @@ myCamera.record()
   });
 
 
-  setInterval(function() {
 
 
-  si.fsOpenFiles().then(data => console.log(data));
-  si.mem().then(data => console.log(data));
 
 
-  si.fsSize()
-  .then(data => {
-    data;
-    console.log(data);
-
-  // var fs = new FileSystem({
-  //   // device = data[0].fs,
-  //   // size = data[0].size
-  // })
-
-  })
-
-  si.dockerContainers()
-      .then(data => {
-        data;
-        // var docker = new DockerProcess({
-        //   state : data[0].name,
-        //   elapsed : data[0].id,
-        // })
-        console.log(data);
-
-      })
-  si.cpuTemperature().then(data => {
-    console.log(data);
-  })
 
 
-  si.dockerAll().then(data => console.log(data));
 
-}, 1000)
+
 server.listen(3000);
 console.log('Server is up and running on port number ' + 3000);
