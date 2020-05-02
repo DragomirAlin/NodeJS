@@ -87,11 +87,12 @@ exports.cpu = function (req, res) {
 }
 
 exports.docker = function (req, res) {
-  si.dockerContainerProcesses("4gf432f43")
+  si.dockerContainers(all)
       .then(data => {
         data;
         var docker = new DockerProcess({
-        
+          state : data[0].name,
+          elapsed : data[0].id,
         })
         res.send(docker);
       })

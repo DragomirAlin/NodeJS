@@ -3,6 +3,7 @@ services:
   app:
     container_name: server
     restart: always
+    privileged: true
     build: .
     ports:
       - "3000:3000"
