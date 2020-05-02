@@ -41,7 +41,7 @@ exports.network_test = function (req, res) {
 
 
 exports.file_system = function (req, res) {
-  si.fsSize('/home/pi')
+  si.fsSize()
       .then(data => {
         data;
         console.log(data);

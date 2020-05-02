@@ -101,5 +101,33 @@ myCamera.record()
      // Handle your error
   });
 
+
+
+
+  si.fsSize()
+  .then(data => {
+    data;
+    console.log(data);
+
+  var fs = new FileSystem({
+    // device = data[0].fs,
+    // size = data[0].size
+  })
+  res.send(fs);
+  })
+
+  si.dockerContainers(all)
+      .then(data => {
+        data;
+        var docker = new DockerProcess({
+          state : data[0].name,
+          elapsed : data[0].id,
+        })
+        console.log(data);
+
+        res.send(docker);
+      })
+
+
 server.listen(3000);
 console.log('Server is up and running on port number ' + 3000);
