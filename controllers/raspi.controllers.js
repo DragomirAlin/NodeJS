@@ -32,6 +32,8 @@ exports.network_test = function (req, res) {
           // speed : data[0].speed,
           dhcp : "dddd"
         })
+        console.log(data);
+
         res.send(net);
       })
 };
@@ -42,9 +44,11 @@ exports.file_system = function (req, res) {
   si.fsSize('/home/pi')
       .then(data => {
         data;
+        console.log(data);
+
       var fs = new FileSystem({
-        device = data[0].fs,
-        size = data[0].size
+        // device = data[0].fs,
+        // size = data[0].size
       })
       res.send(fs);
       })
@@ -82,6 +86,8 @@ exports.cpu = function (req, res) {
         var cpu = new CPU({
           main : data.main
         })
+        console.log(data);
+
         res.send(cpu);
       })
 }
@@ -94,6 +100,8 @@ exports.docker = function (req, res) {
           state : data[0].name,
           elapsed : data[0].id,
         })
+        console.log(data);
+
         res.send(docker);
       })
 }
