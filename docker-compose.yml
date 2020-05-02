@@ -22,6 +22,7 @@ services:
     container_name: rfid
     image: dragomiralin/rfidmongo:v1
     privileged: true
+    restart: always
     links:
       - mongo
  
