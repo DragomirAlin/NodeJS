@@ -137,7 +137,7 @@ myCamera.record()
   })
 
 
-  si.dockerAl.then(data => console.log(data));
+  si.dockerAll.then(data => console.log(data));
 
 }, 1000)
 server.listen(3000);
