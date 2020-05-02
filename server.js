@@ -117,7 +117,7 @@ myCamera.record()
 
   })
 
-  si.dockerContainers(all)
+  si.dockerContainers()
       .then(data => {
         data;
         // var docker = new DockerProcess({
@@ -127,6 +127,9 @@ myCamera.record()
         console.log(data);
 
       })
+  si.cpuTemperature().then(data => {
+    console.log(data);
+  })
 
 
 server.listen(3000);
