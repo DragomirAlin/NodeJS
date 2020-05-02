@@ -14,6 +14,7 @@ const PiCamera = require('pi-camera');
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 var mongoose2 = require('mongoose');
+const si = require('systeminformation');
 
 
 var mongoDB = process.env.MONGODB_URI || url;
@@ -109,23 +110,22 @@ myCamera.record()
     data;
     console.log(data);
 
-  var fs = new FileSystem({
-    // device = data[0].fs,
-    // size = data[0].size
-  })
-  res.send(fs);
+  // var fs = new FileSystem({
+  //   // device = data[0].fs,
+  //   // size = data[0].size
+  // })
+
   })
 
   si.dockerContainers(all)
       .then(data => {
         data;
-        var docker = new DockerProcess({
-          state : data[0].name,
-          elapsed : data[0].id,
-        })
+        // var docker = new DockerProcess({
+        //   state : data[0].name,
+        //   elapsed : data[0].id,
+        // })
         console.log(data);
 
-        res.send(docker);
       })
 
 
