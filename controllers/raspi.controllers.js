@@ -39,12 +39,12 @@ exports.network_test = function (req, res) {
 
 
 exports.file_system = function (req, res) {
-  si.diskLayout()
+  si.fsSize('/home/pi')
       .then(data => {
         data;
       var fs = new FileSystem({
-        // device = data[0].device,
-        // size = data[0].name
+        device = data[0].fs,
+        size = data[0].size
       })
       res.send(fs);
       })
