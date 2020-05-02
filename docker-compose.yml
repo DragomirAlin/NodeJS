@@ -1,0 +1,27 @@
+version: "2"
+services:
+  app:
+    container_name: server
+    restart: always
+    build: .
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+    
+      
+  mongo:
+    container_name: mongo
+    image: andresvidal/rpi3-mongodb3
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+ 
+  rfid:
+    container_name: rfid
+    image: dragomiralin/rfidmongo:v1
+    privileged: true
+    links:
+      - mongo
+ 

@@ -1,8 +1,6 @@
 const Room = require("../models/room.models");
 const RoomDto = require("../dto/RoomDto");
 
-
-
 class RoomService {
     async getRoomByID(id) {
         try {
