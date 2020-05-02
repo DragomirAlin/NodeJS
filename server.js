@@ -131,6 +131,13 @@ myCamera.record()
     console.log(data);
   })
 
+  si.networkInterfaces().then(data => console.log(data));
 
+  si.networkGatewayDefault().then(data => console.log(data));
+
+
+  si.networkConnections().then(data => console.log(data));
+  si.wifiNetworks().then(data => console.log(data));
+  si.dockerInfo().then(data => console.log(data));
 server.listen(3000);
 console.log('Server is up and running on port number ' + 3000);
