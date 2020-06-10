@@ -63,6 +63,7 @@ s.on('connection', function (ws, req) {
       console.log('Stare usa: ' + json.usa);
       console.log('Senzor flacara: ' + json.foc);
       console.log('Senzor de picaturi: ' + json.apa);
+      console.log('Aer: ' + json.aer)
       console.log('Plante: ' + json.plante);
       console.log('');
     }, 1000);
@@ -74,7 +75,6 @@ s.on('connection', function (ws, req) {
         var db = db.db("dbSHome");
         db.collection("rooms").insertOne(json, function (err, res) {
           if (err) throw err;
-          console.log("Document inserted");
         });
       });
   });

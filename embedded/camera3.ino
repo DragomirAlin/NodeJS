@@ -66,7 +66,7 @@ wsconnect();
 void loop() {
   webSocket.loop();
   int sensorValue = analogRead(0);
-  float limitasenzor = 300;
+  float limitasenzor = 500;
   state = digitalRead(sensorMagneticDoor);
   int sza = digitalRead(senzorapa);
 
@@ -77,13 +77,13 @@ void loop() {
          doc["camera"] = 3;
          doc["temperatura"] = (float)dht3.readTemperature();
          doc["umiditatea"] = (float)dht3.readHumidity();
-   if (sensorValue < limitasenzor)
+   if (sensorValue > limitasenzor)
      {
       Serial.println(sensorValue);
-         doc["plante"] = "OK";
+         doc["plante"] = "UDĂ!";
      }else{ 
       Serial.println(sensorValue);
-         doc["plante"] = "UDĂ!";
+         doc["plante"] = "OK!";
     }
    
     if (state == HIGH){
@@ -115,7 +115,7 @@ void loop() {
 
   if (abs(currentMillis - previousMillis) >= interval) {
       previousMillis = currentMillis;
-              delay(5000);
+              delay(1000);
       webSocketClient.sendData(buffer);
 }
   }else{

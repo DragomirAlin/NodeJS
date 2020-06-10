@@ -93,7 +93,7 @@ void loop() {
 
   if (abs(currentMillis - previousMillis) >= interval) {
       previousMillis = currentMillis;
-              delay(5000);
+              delay(1000);
       webSocketClient.sendData(buffer);
 }
   }else{
