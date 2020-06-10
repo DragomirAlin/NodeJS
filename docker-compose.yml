@@ -21,7 +21,7 @@ services:
  
   rfid:
     container_name: rfid
-    image: dragomiralin/rfidmongo:latest
+    image: dragomiralin/pyrfid:v1
     privileged: true
     restart: always
     links:
