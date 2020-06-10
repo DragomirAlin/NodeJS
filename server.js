@@ -65,7 +65,7 @@ s.on('connection', function (ws, req) {
       console.log('Senzor de picaturi: ' + json.apa);
       console.log('Plante: ' + json.plante);
       console.log('');
-    }, 5000);
+    }, 1000);
 
     MongoClient.connect(url,
       { useNewUrlParser: true, useUnifiedTopology: true },
