@@ -10,11 +10,9 @@ var url = "mongodb://mongo:27017/dbSHome";
 var http = require('http');
 const WebSocket = require('ws');
 const cors = require('cors');
-const PiCamera = require('pi-camera');
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 var mongoose2 = require('mongoose');
-const si = require('systeminformation');
 
 
 var mongoDB = process.env.MONGODB_URI || url;
@@ -65,6 +63,7 @@ s.on('connection', function (ws, req) {
       console.log('Stare usa: ' + json.usa);
       console.log('Senzor flacara: ' + json.foc);
       console.log('Senzor de picaturi: ' + json.apa);
+      console.log('Plante: ' + json.plante);
       console.log('');
     }, 5000);
 
@@ -83,32 +82,6 @@ s.on('connection', function (ws, req) {
     console.log("lost one client");
   });
 });
-
-const myCamera = new PiCamera({
-  mode: 'video',
-  output: `${ __dirname }/test1.h264`,
-  width: 640,
-  height: 480,
-  timeout: 0, // Record for 5 seconds
-  nopreview: true,
-  datatime: true,
-});
-
-myCamera.record()
-  .then((result) => {
-    console.log("The video has starting.")
-  })
-  .catch((error) => {
-     // Handle your error
-  });
-
-
-
-
-
-
-
-
 
 
 server.listen(3000);

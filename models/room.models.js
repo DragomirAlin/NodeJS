@@ -10,6 +10,7 @@ var RoomSchema = new Schema({
     foc: String,
     aer: Number,
     apa: String,
+    plante: String,
     
 }
 );

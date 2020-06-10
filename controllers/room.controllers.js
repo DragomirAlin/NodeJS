@@ -12,6 +12,7 @@ exports.room_create = function (req, res) {
       usa: req.body.usa,
       foc: req.body.foc,
       aer : req.body.aer,
+      plante : req.body.plante,
     }
   );
 
@@ -201,12 +202,12 @@ exports.room_air_on = function (req, res) {
   };
   const httpReq = http.get(options, function (httpRes) {
     //output status code to your console
-    console.log("statusCode LED 1: " + httpRes.statusCode);
+    console.log("statusCode: " + httpRes.statusCode);
 
     httpRes.on("data", function (chunk) {
       // still nothing happens on client - this will also just print to server console
       // console.log("data", chunk);
-      console.log("Light 3 - OFF")
+      console.log("Ventilator - ON")
       // return some data for requested route
       return res.send(chunk);
     });
@@ -223,12 +224,12 @@ exports.room_air_off = function (req, res) {
   };
   const httpReq = http.get(options, function (httpRes) {
     //output status code to your console
-    console.log("statusCode LED 1: " + httpRes.statusCode);
+    console.log("statusCode: " + httpRes.statusCode);
 
     httpRes.on("data", function (chunk) {
       // still nothing happens on client - this will also just print to server console
       // console.log("data", chunk);
-      console.log("Light 3 - OFF")
+      console.log("Ventilator OFF")
       // return some data for requested route
       return res.send(chunk);
     });

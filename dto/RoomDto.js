@@ -1,5 +1,5 @@
 class RoomDto {
-    constructor(camera, temperatura, umiditatea, nivelGaz, usa, foc, aer, apa) {
+    constructor(camera, temperatura, umiditatea, nivelGaz, usa, foc, aer, apa, plante) {
       this.camera = camera;
       this.temperatura = temperatura;
       this.umiditatea = umiditatea;
@@ -8,6 +8,7 @@ class RoomDto {
       this.foc = foc;
       this.aer = aer;   
       this.apa = apa;
+      this.plante = plante;
     } //test
   }
   

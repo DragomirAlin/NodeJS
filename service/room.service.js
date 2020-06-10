@@ -10,7 +10,7 @@ class RoomService {
             rooms.sort((el1, el2) => el1 < el2 ? 1 : -1);
             const lastRoom = rooms[0];
             // map to dto 
-            const roomDto = new RoomDto(lastRoom.camera, lastRoom.temperatura, lastRoom.umiditatea, lastRoom.nivelGaz, lastRoom.usa, lastRoom.foc, lastRoom.aer, lastRoom.apa);
+            const roomDto = new RoomDto(lastRoom.camera, lastRoom.temperatura, lastRoom.umiditatea, lastRoom.nivelGaz, lastRoom.usa, lastRoom.foc, lastRoom.aer, lastRoom.apa, lastRoom.plante);
             return roomDto;
         } catch (err) {
             throw Error(`ID ${id} not found`);
