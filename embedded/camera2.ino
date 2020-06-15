@@ -10,15 +10,15 @@
 #include <WebSocketsServer.h>
 
 
-WebSocketsServer webSocket = WebSocketsServer(3000); //ws will run on port 81
+WebSocketsServer webSocket = WebSocketsServer(3000); //setare port ws
 boolean handshakeFailed=0;
-String data= "";
+String data= ""; // buffer
 String data2 ="";
 String data3 = "";
-char path[] = "/";   //identifier of this device
+char path[] = "/";  // identificator pentru dispozitiv
 const char* ssid     = "SmartHome";
 const char* password = "66294894";
-char* host = "192.168.0.102";  // trebuie verificata adresa alocata de DHCP a laptop-ului unde se afla serverul de Nodejs
+char* host = "192.168.0.102";  // adresa serverului
 const int espport= 3000;
 size_t measureJsonPretty(const JsonDocument& doc);
 
@@ -30,20 +30,20 @@ MQ135 gasSensor = MQ135(ANALOGPIN);
 WebSocketClient webSocketClient;
 unsigned long previousMillis = 0;
 unsigned long currentMillis;
-unsigned long interval=300; //interval for sending data to the websocket server in ms
-WiFiClient client; // Use WiFiClient class to create TCP connections
+unsigned long interval=300; // interval pentru trimiterea datelor către serverul websocket în ms
+WiFiClient client; // pentru a crea conexiuni TCP
 
 
 void setup() {
   Serial.begin(115200);
     dht3.begin();
     pinMode(buzzer, OUTPUT);
-
   delay(10);
-  // We start by connecting to a WiFi network
+
+  // Conectarea la rețeaua WiFi
   Serial.println();
   Serial.println();
-  Serial.print("Connecting to ");
+  Serial.print("Conectare la ");
   Serial.println(ssid);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
@@ -51,8 +51,8 @@ void setup() {
     Serial.print(".");
       }
   Serial.println("");
-  Serial.println("WiFi connected");  
-  Serial.println("IP address: ");
+  Serial.println("WiFi Conexiune reușită!");  
+  Serial.println("Adresa IP: ");
   Serial.println(WiFi.localIP());
   delay(1000);
 
@@ -77,24 +77,19 @@ void loop() {
          doc["temperatura"] = (float)dht3.readTemperature();
          doc["umiditatea"] = (float)dht3.readHumidity();
          doc["aer"] = gasSensor.getPPM();
-               digitalWrite(buzzer, HIGH);
 
-   
   delay(200);
 
     String buffer;
-    serializeJsonPretty(doc, buffer);
+    serializeJsonPretty(doc, buffer);  // serializare document JSON
     Serial.println(buffer);
     webSocketClient.getData(buffer); 
 
   if (buffer.length() > 0  ) {
-    //*************send log data to server in certain interval************************************
- //currentMillis=millis();
-
   if (abs(currentMillis - previousMillis) >= interval) {
       previousMillis = currentMillis;
               delay(1000);
-      webSocketClient.sendData(buffer);
+      webSocketClient.sendData(buffer); //trimitere document spre server
 }
   }else{
     }
@@ -103,11 +98,11 @@ void loop() {
 }
 
 void wsconnect(){
-  // Connect to the websocket server
+   // Conectarea la serverul Websocket
   if (client.connect(host, espport)) {
-    Serial.println("Connected");
+    Serial.println("Conectat!");
   } else {
-    Serial.println("Connection failed.");
+    Serial.println("Conectare eșuată!");
       delay(1000);  
    
    if(handshakeFailed){
@@ -116,13 +111,13 @@ void wsconnect(){
     }
     handshakeFailed=1;
   }
-           // Handshake with the server
+            // Handshake cu serverul
       webSocketClient.path = path;
       webSocketClient.host = host;
   if (webSocketClient.handshake(client)) {
-    Serial.println("Handshake successful");
+    Serial.println("Handshake succes!");
   }else { 
-    Serial.println("Handshake failed.");
+    Serial.println("Handshake eșuat!");
    delay(4000);  
    
    if(handshakeFailed){

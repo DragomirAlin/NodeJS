@@ -12,9 +12,4 @@ router.get('/CPU', raspi_controller.cpu);
 router.get('/Docker', raspi_controller.docker );
 router.get('/netCon', raspi_controller.network_connection)
 
-
-
-
-  
-
 module.exports = router;

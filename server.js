@@ -1,20 +1,19 @@
-var bodyParser = require("body-parser");
-const express = require('express'); //express framework to have a higher level of methods
-const app = express(); //assign app variable the express class/method
-var room = require('./routes/room.routers'); // Imports routes for the products var product = require('./routes/product'); // Imports routes for the products
-var raspi = require('./routes/raspi.routers'); // Imports routes for the products var product = require('./routes/product'); // Imports routes for the products
-var rfid = require('./routes/rfid.routers');
-var url = "mongodb://mongo:27017/dbSHome";
-// var url2 = "mongodb://localhost:27017/RFID";
-// var url2 = "mongodb+srv://alin:alin@database-2t2ug.mongodb.net/RFID?retryWrites=true&w=majority";
-var http = require('http');
+var bodyParser = require("body-parser"); // analizează documentele JSON (req.body)
+const express = require('express'); //oferă un set  de funcții pentru aplicație
+const app = express(); // asignare express
+var room = require('./routes/room.routers'); // importul rutelor pentru camere
+var raspi = require('./routes/raspi.routers'); //  importul rutelor pentru raspiberry PI
+var rfid = require('./routes/rfid.routers'); // importul rutelor pentru acces RFID
+var url = "mongodb://mongo:27017/dbSHome"; // adresa URL a bazei de date
+// var url2 = "mongodb+srv://alin:alin@database-2t2ug.mongodb.net/RFID?retryWrites=true&w=majority"; // adresă URL bază de date în CLOUD
+var http = require('http'); 
 const WebSocket = require('ws');
 const cors = require('cors');
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
 var mongoose2 = require('mongoose');
 
-
+//Conectarea la baza de date
 var mongoDB = process.env.MONGODB_URI || url;
 mongoose.connect(mongoDB,
   { useNewUrlParser: true, useUnifiedTopology: true },
@@ -25,11 +24,10 @@ mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error 1:'));
 
-
-
-
+//Conectarea la baza de date
 var mongoDB2 = process.env.MONGODB_URI || url;
- mongoose2.connect(mongoDB2,{ useNewUrlParser: true, useUnifiedTopology: true },
+ mongoose2.connect(mongoDB2,
+  { useNewUrlParser: true, useUnifiedTopology: true },
   (err, client) => {
     if (err) return console.log(err);
     });
@@ -37,24 +35,21 @@ mongoose2.Promise = global.Promise;
 var db2 = mongoose2.connection;
 db2.on('error', console.error.bind(console, 'MongoDB connection error 2:'));
 
-app.use(cors());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-app.use('/rooms', room); 
-app.use('/raspi', raspi);
-app.use('/rfid', rfid);
 
-const server = http.createServer(app);//create a server
-require('dns').lookup(require('os').hostname(), function (err, add, fam) {
-  console.log('addr: ' + add);
-})
+app.use(cors()); // activare CORS - Cross Origin Resource Sharing
+app.use(bodyParser.urlencoded({ extended: true })); // suport pentru application/x-www-urlencoded post data
+app.use(bodyParser.json()); // suport pentru analiza datelor de tip post
+app.use('/rooms', room);  // rută spre metodele din room
+app.use('/raspi', raspi); // rută spre metodele din raspi
+app.use('/rfid', rfid); // rută spre metodele din rfid
 
+const server = http.createServer(app); // o instață a serverului HTTP pentru a gestiona cererile
 
-const s = new WebSocket.Server({ server });
-s.on('connection', function (ws, req) {
-  ws.on('message', function (message) {
-    var json = JSON.parse(message);
-    json.last_updated = new Date();
+const s = new WebSocket.Server({ server }); // Stabilire conexiune WebSocket 
+s.on('connection', function (ws, req) { // deschidere conexiune
+  ws.on('message', function (message) { // recepția datelor în message
+    var json = JSON.parse(message); // parsare document JSON
+
     setTimeout(function () {
       console.log('Camera: ' + json.camera);
       console.log('Temperatura: ' + json.temperatura);
@@ -66,8 +61,9 @@ s.on('connection', function (ws, req) {
       console.log('Aer: ' + json.aer)
       console.log('Plante: ' + json.plante);
       console.log('');
-    }, 1000);
+    }, 1000); // setare interval pentru afisare (1sec)
 
+    //Conexiune cu baza de date pentru inserarea datelor de la module
     MongoClient.connect(url,
       { useNewUrlParser: true, useUnifiedTopology: true },
       (err, db) => {
@@ -79,10 +75,9 @@ s.on('connection', function (ws, req) {
       });
   });
   ws.on('close', function () {
-    console.log("lost one client");
+    console.log("închidere ws");
   });
 });
 
-
-server.listen(3000);
-console.log('Server is up and running on port number ' + 3000);
+server.listen(3000); // Pornirea serverului cu portul 3000
+console.log('Serverul este pornit, funcționează pe portul ' + 3000);
