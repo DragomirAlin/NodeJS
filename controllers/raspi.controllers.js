@@ -32,7 +32,6 @@ exports.network_test = function (req, res) {
           // speed : data[0].speed,
           dhcp : "dddd"
         })
-        console.log(data);
 
         res.send(net);
       })
@@ -44,7 +43,6 @@ exports.file_system = function (req, res) {
   si.fsSize()
       .then(data => {
         data;
-        console.log(data);
 
       var fs = new FileSystem({
         // device = data[0].fs,
@@ -86,7 +84,6 @@ exports.cpu = function (req, res) {
         var cpu = new CPU({
           main : data.main
         })
-        console.log(data);
 
         res.send(cpu);
       })
@@ -100,7 +97,6 @@ exports.docker = function (req, res) {
           state : data[0].name,
           elapsed : data[0].id,
         })
-        console.log(data);
 
         res.send(docker);
       })
@@ -111,7 +107,7 @@ exports.network_connection = function (req, res) {
       .then(data => {
         data;
         var netCon = new NetworkConnection({
-          ssid :  data[0].ssid,
+          
           signal : data[0].signalLevel,
           quality : data[0].quality
          

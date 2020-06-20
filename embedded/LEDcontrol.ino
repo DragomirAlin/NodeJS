@@ -24,7 +24,7 @@ void setup() {
   pinMode(ledPin4, OUTPUT);
   digitalWrite(ledPin4, LOW);
  
-  // Connect to WiFi network
+  // Conectare la rețeaua WIFI
   Serial.println();
   Serial.println();
   Serial.print("Connecting to ");
@@ -39,11 +39,11 @@ void setup() {
   Serial.println("");
   Serial.println("WiFi connected");
  
-  // Start the server
+  // Pornire server
   server.begin();
   Serial.println("Server started");
  
-  // Print the IP address
+  // Printare adresă IP
   Serial.print("Use this URL to connect: ");
   Serial.print("http://");
   Serial.print(WiFi.localIP());
@@ -52,24 +52,24 @@ void setup() {
 }
  
 void loop() {
-  // Check if a client has connected
+  // Verificare conectare client
   WiFiClient client = server.available();
   if (!client) {
     return;
   }
  
-  // Wait until the client sends some data
+  // Așteptare date de la client
   Serial.println("new client");
   while(!client.available()){
     delay(1);
   }
  
-  // Read the first line of the request
+  // Citiți prima linie a cererii
   String request = client.readStringUntil('\r');
   Serial.println(request);
   client.flush();
  
-  // Match the request
+  // Potrivire cerere
  
   int value = LOW;
   if (request.indexOf("/1/LED=ON") != -1)  {
@@ -111,13 +111,12 @@ void loop() {
     digitalWrite(ledPin4, LOW);
   }
  
-// Set ledPin according to the request
-//digitalWrite(ledPin, value);
+
  
-  // Return the response
+  // Răspuns cerere
   client.println("HTTP/1.1 200 OK");
   client.println("Content-Type: text/html");
-  client.println(""); //  do not forget this one
+  client.println("");
   client.println("<!DOCTYPE HTML>");
   client.println("<html>");
  

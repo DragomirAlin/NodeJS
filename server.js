@@ -11,7 +11,7 @@ const WebSocket = require('ws');
 const cors = require('cors');
 var MongoClient = require('mongodb').MongoClient;
 var mongoose = require('mongoose');
-var mongoose2 = require('mongoose');
+// var mongoose2 = require('mongoose');
 
 //Conectarea la baza de date
 var mongoDB = process.env.MONGODB_URI || url;
@@ -25,15 +25,15 @@ var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error 1:'));
 
 //Conectarea la baza de date
-var mongoDB2 = process.env.MONGODB_URI || url;
- mongoose2.connect(mongoDB2,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  (err, client) => {
-    if (err) return console.log(err);
-    });
-mongoose2.Promise = global.Promise;
-var db2 = mongoose2.connection;
-db2.on('error', console.error.bind(console, 'MongoDB connection error 2:'));
+// var mongoDB2 = process.env.MONGODB_URI || url;
+//  mongoose2.connect(mongoDB2,
+//   { useNewUrlParser: true, useUnifiedTopology: true },
+//   (err, client) => {
+//     if (err) return console.log(err);
+//     });
+// mongoose2.Promise = global.Promise;
+// var db2 = mongoose2.connection;
+// db2.on('error', console.error.bind(console, 'MongoDB connection error 2:'));
 
 
 app.use(cors()); // activare CORS - Cross Origin Resource Sharing
