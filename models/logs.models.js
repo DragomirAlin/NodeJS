@@ -1,7 +1,6 @@
 var mongoose2 = require('mongoose');
 var Schema2 = mongoose2.Schema;
 
-// Schemă pentru documentele JSON 
 var logs = new Schema2({
     nume: String,
     data: String,

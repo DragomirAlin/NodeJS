@@ -9,7 +9,7 @@ import datetime
 
 GPIO.setwarnings(False);
 continue_reading = True
-myclient = pymongo.MongoClient("mongodb://alin:alin@database-shard-00-00-2t2ug.mongodb.net:27017,database-shard-00-01-2t2ug.mongodb.net:27017,database-shard-00-02-2t2ug.mongodb.net:27017/RFID?ssl=true&replicaSet=database-shard-0&authSource=admin&retryWrites=true&w=majority")
+myclient = pymongo.MongoClient("mongodb://localhost:27017")
 mydb = myclient["RFID"]
 mylog = mydb["log"]
 myuser = mydb["user"]
@@ -23,7 +23,6 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setup(3, GPIO.OUT)
 pwm=GPIO.PWM(3, 50)
 pwm.start(7)
-
 
 # Create an object of the class MFRC522
 MIFAREReader = MFRC522.MFRC522()

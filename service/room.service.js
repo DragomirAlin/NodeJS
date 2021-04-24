@@ -3,7 +3,6 @@ const RoomDto = require("../dto/RoomDto");
 
 class RoomService {
 
-    //funcție pentru returnarea ultimului document sosit în server pentru fiecare cameră
     async getRoomByID(id) {
         try {
             const rooms = await Room.find({
@@ -11,7 +10,6 @@ class RoomService {
             });
             rooms.sort((el1, el2) => el1 < el2 ? 1 : -1);
             const lastRoom = rooms[0];
-            // maparea datelor la schema RoomDto
             const roomDto = new RoomDto(lastRoom.camera, lastRoom.temperatura, lastRoom.umiditatea, lastRoom.nivelGaz, lastRoom.usa, lastRoom.foc, lastRoom.aer, lastRoom.apa, lastRoom.plante);
             return roomDto;
         } catch (err) {
@@ -19,7 +17,6 @@ class RoomService {
         }
     }
 
-    //funcție pentru afișarea tuturor datelor
     async allRooms() {
         const rooms = await Room.find({ id: req.params.id });
         rooms.sort((el1, el2) => el1 < el2 ? 1 : 0);

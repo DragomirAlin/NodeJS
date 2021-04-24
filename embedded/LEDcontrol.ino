@@ -1,7 +1,7 @@
 #include <ESP8266WiFi.h>
  
 const char* ssid = "SmartHome";
-const char* password = "66294894";
+const char* password = "";
  
 int ledPin = D2;
 int ledPin2 = D1;
@@ -24,7 +24,6 @@ void setup() {
   pinMode(ledPin4, OUTPUT);
   digitalWrite(ledPin4, LOW);
  
-  // Conectare la rețeaua WIFI
   Serial.println();
   Serial.println();
   Serial.print("Connecting to ");
@@ -39,11 +38,9 @@ void setup() {
   Serial.println("");
   Serial.println("WiFi connected");
  
-  // Pornire server
   server.begin();
   Serial.println("Server started");
  
-  // Printare adresă IP
   Serial.print("Use this URL to connect: ");
   Serial.print("http://");
   Serial.print(WiFi.localIP());
@@ -52,25 +49,20 @@ void setup() {
 }
  
 void loop() {
-  // Verificare conectare client
   WiFiClient client = server.available();
   if (!client) {
     return;
   }
  
-  // Așteptare date de la client
   Serial.println("new client");
   while(!client.available()){
     delay(1);
   }
  
-  // Citiți prima linie a cererii
   String request = client.readStringUntil('\r');
   Serial.println(request);
   client.flush();
- 
-  // Potrivire cerere
- 
+
   int value = LOW;
   if (request.indexOf("/1/LED=ON") != -1)  {
     digitalWrite(ledPin, HIGH);
@@ -111,9 +103,6 @@ void loop() {
     digitalWrite(ledPin4, LOW);
   }
  
-
- 
-  // Răspuns cerere
   client.println("HTTP/1.1 200 OK");
   client.println("Content-Type: text/html");
   client.println("");

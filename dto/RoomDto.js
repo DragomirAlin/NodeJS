@@ -9,7 +9,7 @@ class RoomDto {
       this.aer = aer;   
       this.apa = apa;
       this.plante = plante;
-    } // pentru maparea datelor
+    }
   }
   
   module.exports = RoomDto;

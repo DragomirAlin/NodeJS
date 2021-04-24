@@ -7,15 +7,15 @@
 #define DHTTYPE DHT11
 #include <WebSocketsServer.h>
 
-WebSocketsServer webSocket = WebSocketsServer(3000); //ws will run on port 81
+WebSocketsServer webSocket = WebSocketsServer(3000);
 boolean handshakeFailed=0;
 String data= "";
 String data2 ="";
 String data3 = "";
-char path[] = "/";   //identifier of this device
+char path[] = "/";
 const char* ssid     = "SmartHome";
 const char* password = "66294894";
-char* host = "192.168.0.102";  // trebuie verificata adresa alocata de DHCP a laptop-ului unde se afla serverul de Nodejs
+char* host = "192.168.0.102";
 const int espport= 3000;
 size_t measureJsonPretty(const JsonDocument& doc);
 
@@ -26,8 +26,8 @@ DHT dht3 = DHT(D3, DHTTYPE);
 WebSocketClient webSocketClient;
 unsigned long previousMillis = 0;
 unsigned long currentMillis;
-unsigned long interval=300; //interval for sending data to the websocket server in ms
-WiFiClient client; // Use WiFiClient class to create TCP connections
+unsigned long interval=300;
+WiFiClient client;
 
 
 void setup() {
@@ -36,7 +36,6 @@ void setup() {
     pinMode(buzzer, OUTPUT);
 
   delay(10);
-  // We start by connecting to a WiFi network
   Serial.println();
   Serial.println();
   Serial.print("Connecting to ");
@@ -106,7 +105,6 @@ void loop() {
 }
 
 void wsconnect(){
-  // Connect to the websocket server
   if (client.connect(host, espport)) {
     Serial.println("Connected");
   } else {
@@ -119,7 +117,6 @@ void wsconnect(){
     }
     handshakeFailed=1;
   }
-           // Handshake with the server
       webSocketClient.path = path;
       webSocketClient.host = host;
   if (webSocketClient.handshake(client)) {

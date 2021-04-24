@@ -7,27 +7,27 @@
 #define DHTTYPE DHT11
 #include <WebSocketsServer.h>
 
-WebSocketsServer webSocket = WebSocketsServer(3000); // setare port ws
+WebSocketsServer webSocket = WebSocketsServer(3000);
 boolean handshakeFailed=0;
-String data= ""; // buffer
+String data= "";
 String data2 ="";
 String data3 = "";
-char path[] = "/";   // identificator pentru dispozitiv
+char path[] = "/";
 const char* ssid     = "SmartHome";
-const char* password = "66294894";
-char* host = "192.168.0.102";  // adresa serverului
+const char* password = "";
+char* host = "192.168.0.102";
 const int espport= 3000;
 size_t measureJsonPretty(const JsonDocument& doc); 
 
 
-int flame = D0; // pin senzor flacără
-DHT dht3 = DHT(D1, DHTTYPE); // senzor DTH11
+int flame = D0;
+DHT dht3 = DHT(D1, DHTTYPE);
   
 WebSocketClient webSocketClient;
 unsigned long previousMillis = 0;
 unsigned long currentMillis;
-unsigned long interval=300// interval pentru trimiterea datelor către serverul websocket în ms; 
-WiFiClient client; // pentru a crea conexiuni TCP
+unsigned long interval=300
+WiFiClient client;
 
 
 void setup() {
@@ -36,7 +36,6 @@ void setup() {
   pinMode(flame, INPUT);
   delay(10);
 
-  // Conectarea la rețeaua WiFi
   Serial.println();
   Serial.println();
   Serial.print("Conectare la ");
@@ -68,7 +67,7 @@ void loop() {
     
   if (client.connected()) {
       currentMillis=millis(); 
-     StaticJsonDocument<300> doc; // memorie alocată pentru doc
+     StaticJsonDocument<300> doc;
          doc["camera"] = 1;
          doc["temperatura"] = (float)dht3.readTemperature();
          doc["umiditatea"] = (float)dht3.readHumidity();
@@ -88,7 +87,7 @@ void loop() {
   delay(200);
 
     String buffer;
-    serializeJsonPretty(doc, buffer); // serializare document JSON
+    serializeJsonPretty(doc, buffer);
     Serial.println(buffer);
     webSocketClient.getData(buffer); 
 
@@ -98,7 +97,7 @@ void loop() {
   if (abs(currentMillis - previousMillis) >= interval) {
       previousMillis = currentMillis;
               delay(1000);
-      webSocketClient.sendData(buffer); //trimitere document spre server
+      webSocketClient.sendData(buffer);
 }
   }else{
     }
@@ -107,7 +106,6 @@ void loop() {
 }
 
 void wsconnect(){
-  // Conectarea la serverul Websocket
   if (client.connect(host, espport)) {
     Serial.println("Conectat!");
   } else {
@@ -120,7 +118,6 @@ void wsconnect(){
     }
     handshakeFailed=1;
   }
-           // Handshake cu serverul
       webSocketClient.path = path;
       webSocketClient.host = host;
   if (webSocketClient.handshake(client)) {

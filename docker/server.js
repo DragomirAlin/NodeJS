@@ -1,12 +1,10 @@
 var bodyParser = require("body-parser");
-const express = require('express'); //express framework to have a higher level of methods
-const app = express(); //assign app variable the express class/method
-var room = require('./routes/room.routers'); // Imports routes for the products var product = require('./routes/product'); // Imports routes for the products
-var raspi = require('./routes/raspi.routers'); // Imports routes for the products var product = require('./routes/product'); // Imports routes for the products
+const express = require('express');
+const app = express();
+var room = require('./routes/room.routers');
+var raspi = require('./routes/raspi.routers');
 var rfid = require('./routes/rfid.routers');
 var url = "mongodb://mongo:27017/dbSHome";
-// var url2 = "mongodb://localhost:27017/RFID";
-// var url2 = "mongodb+srv://alin:alin@database-2t2ug.mongodb.net/RFID?retryWrites=true&w=majority";
 var http = require('http');
 const WebSocket = require('ws');
 const cors = require('cors');

@@ -2,7 +2,6 @@ var Room = require('../models/room.models');
 const roomService = require("../service/room.service");
 var http = require('http');
 
-// Funcție pentru crearea unui document
 exports.room_create = function (req, res) {
   var room = new Room(
     {
@@ -25,7 +24,6 @@ exports.room_create = function (req, res) {
   })
 };
 
-//Funcție care aplează Service roomByID
 exports.roomById = async (request, response, next) => {
   const roomId = request.params.id;
   roomService
@@ -37,7 +35,6 @@ exports.roomById = async (request, response, next) => {
     });
 };
 
-// Funcția de UPDATE document
 exports.room_update = function (req, res) {
   Room.findByIdAndUpdate(req.params.id, { $set: req.body }, function (err, room) {
     if (err) return next(err);
@@ -45,7 +42,6 @@ exports.room_update = function (req, res) {
   });
 };
 
-// Funcția de DELETE
 exports.room_delete = function (req, res) {
   Room.findByIdAndRemove(req.params.id, function (err) {
     if (err) return next(err);
@@ -53,7 +49,6 @@ exports.room_delete = function (req, res) {
   })
 };
 
-// Metodă GET pentru aprindere LED
 exports.room_1_on = function (req, res) {
   const options = {
     host: "192.168.0.101",
@@ -65,14 +60,12 @@ exports.room_1_on = function (req, res) {
   const httpReq = http.get(options, function (httpRes) {
     console.log("status cod: " + httpRes.statusCode);
     httpRes.on("data", function (chunk) {
-      // console.log("data", chunk);
       console.log("Light 1 - ON")
       return res.send(chunk);
     });
   });
 }
 
-// Metodă GET pentru stingere LED
 exports.room_1_off = function (req, res) {
   const options = {
     host: "192.168.0.101",
@@ -84,14 +77,12 @@ exports.room_1_off = function (req, res) {
   const httpReq = http.get(options, function (httpRes) {
     console.log("statusCode: " + httpRes.statusCode);
     httpRes.on("data", function (chunk) {
-      // console.log("data", chunk);
       console.log("Light 1 - OFF")
       return res.send(chunk);
     });
   });
 }
 
-// Metodă GET pentru aprindere LED
 exports.room_2_on = function (req, res) {
   const options = {
     host: "192.168.0.101",
@@ -110,7 +101,6 @@ exports.room_2_on = function (req, res) {
   });
 }
 
-// Metodă GET pentru stingere LED
 exports.room_2_off = function (req, res) {
   const options = {
     host: "192.168.0.101",
@@ -129,7 +119,6 @@ exports.room_2_off = function (req, res) {
   });
 }
 
-// Metodă GET pentru aprindere LED
 exports.room_3_on = function (req, res) {
   const options = {
     host: "192.168.0.101",
@@ -148,7 +137,6 @@ exports.room_3_on = function (req, res) {
   });
 }
 
-// Metodă GET pentru stingere LED
 exports.room_3_off = function (req, res) {
   const options = {
     host: "192.168.0.101",
@@ -167,7 +155,6 @@ exports.room_3_off = function (req, res) {
   });
 }
 
-// Metodă GET pentru pornire ventilator
 exports.room_air_on = function (req, res) {
   const options = {
     host: "192.168.0.101",
@@ -186,7 +173,6 @@ exports.room_air_on = function (req, res) {
   });
 }
 
-// Metodă GET pentru oprire ventilator
 exports.room_air_off = function (req, res) {
   const options = {
     host: "192.168.0.101",
@@ -198,7 +184,6 @@ exports.room_air_off = function (req, res) {
   const httpReq = http.get(options, function (httpRes) {
     console.log("statusCode: " + httpRes.statusCode);
     httpRes.on("data", function (chunk) {
-      // console.log("data", chunk);
       console.log("Ventilator OFF")
       return res.send(chunk);
     });
