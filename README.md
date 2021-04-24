@@ -1,2 +1,2 @@
 # NodeJS
-Server NodeJS with API
+About project (Smart Home project)[https://dragomiralin.github.io/]
